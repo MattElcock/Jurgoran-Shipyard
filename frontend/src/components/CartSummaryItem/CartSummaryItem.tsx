@@ -1,11 +1,11 @@
-import { Box, Button, ButtonGroup, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Stack, Text } from '@chakra-ui/react'
 
 type CartSummaryItemProps = {
-  name: string;
-  costPerItem: number;
-  quantity: number;
-  removeFromBasketHandler?: () => void;
-};
+  name: string
+  costPerItem: number
+  quantity: number
+  removeFromBasketHandler?: () => void
+}
 
 const CartSummaryItem = ({
   name,
@@ -13,8 +13,8 @@ const CartSummaryItem = ({
   quantity,
   removeFromBasketHandler,
 }: CartSummaryItemProps) => {
-  const formatter = new Intl.NumberFormat("en-UK");
-  const totalCost = costPerItem * quantity;
+  const formatter = new Intl.NumberFormat('en-UK')
+  const totalCost = costPerItem * quantity
   return (
     <Box pt="4">
       <Stack spacing={2}>
@@ -34,7 +34,7 @@ const CartSummaryItem = ({
           </Box>
 
           <Text color="gray.400" fontSize="sm">
-            Cost per item:{" "}
+            Cost per item:{' '}
             <Text
               as="span"
               fontFamily="aurebeshregular"
@@ -51,13 +51,13 @@ const CartSummaryItem = ({
         {removeFromBasketHandler && (
           <ButtonGroup variant="link" colorScheme="white" size="xs">
             <Button onClick={removeFromBasketHandler}>
-              Remove From Basket
+              Remove All From Basket
             </Button>
           </ButtonGroup>
         )}
       </Stack>
     </Box>
-  );
-};
+  )
+}
 
-export { CartSummaryItem };
+export { CartSummaryItem }
