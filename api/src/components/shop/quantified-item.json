@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shop_quantified_items",
+  "info": {
+    "displayName": "QuantifiedStarship",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "item": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::starship.starship"
+    },
+    "quantity": {
+      "type": "integer",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "order",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shop.quantified-item"
+    },
+    "customerName": {
+      "type": "string",
+      "required": true
+    },
+    "customerDiscordID": {
+      "type": "string",
+      "required": true,
+      "regex": "^.{3,32}#[0-9]{4}$"
+    },
+    "powerbase": {
+      "type": "string",
+      "required": true
+    },
+    "role": {
+      "type": "string",
+      "required": true
+    },
+    "totalCost": {
+      "type": "decimal",
+      "required": true
+    },
+    "deliveryOrCollection": {
+      "type": "enumeration",
+      "enum": [
+        "Delivery",
+        "Collection"
+      ],
+      "required": true
+    },
+    "deliveryLocation": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "text"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "confirmed",
+        "delivered"
+      ],
+      "required": true,
+      "default": "pending"
+    }
+  }
+}

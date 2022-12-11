@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_armament_weapon_configurations",
+  "info": {
+    "displayName": "weaponConfiguration",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "quantity": {
+      "type": "integer",
+      "required": true
+    },
+    "weapon": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::weapon.weapon"
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "kind": "collectionType",
+  "collectionName": "starships",
+  "info": {
+    "singularName": "starship",
+    "pluralName": "starships",
+    "displayName": "Starship",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "cost": {
+      "type": "decimal",
+      "required": true
+    },
+    "shieldStrength": {
+      "type": "enumeration",
+      "enum": [
+        "none",
+        "extraWeak",
+        "weak",
+        "average",
+        "strong",
+        "extraStrong"
+      ],
+      "required": true
+    },
+    "armament": {
+      "type": "component",
+      "repeatable": true,
+      "component": "armament.weapon-configuration",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "starfighter",
+        "capitalShip",
+        "supportShip",
+        "transportShip"
+      ],
+      "required": true
+    },
+    "subtype": {
+      "type": "enumeration",
+      "enum": [
+        "bomber",
+        "gunship",
+        "scout",
+        "strikefighter",
+        "interceptor"
+      ],
+      "required": true
+    }
+  }
+}
