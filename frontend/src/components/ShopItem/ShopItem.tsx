@@ -12,6 +12,7 @@ import {
   CardFooter,
   Box,
 } from '@chakra-ui/react'
+import getConfig from 'next/config'
 
 type ShopItemProps = {
   title: string
@@ -32,6 +33,8 @@ const ShopItem = ({
   addToCartHandler,
 }: ShopItemProps) => {
   const formatter = new Intl.NumberFormat('en-UK')
+  const { publicRuntimeConfig } = getConfig()
+
   return (
     <>
       <Card
@@ -43,7 +46,7 @@ const ShopItem = ({
           bgColor="black"
           objectFit="cover"
           maxW={{ base: '100%', sm: '200px' }}
-          src={`http://localhost:1337${imageUrl}`}
+          src={`${publicRuntimeConfig.databaseURI}${imageUrl}`}
           alt={imageAltText}
         />
         <Stack>
