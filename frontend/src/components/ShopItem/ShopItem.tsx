@@ -6,70 +6,89 @@ import {
   List,
   ListItem,
   Badge,
-  Divider,
-  CardFooter,
   Button,
   Image,
-  Box,
   Text,
+  CardFooter,
+  Box,
 } from '@chakra-ui/react'
 
 type ShopItemProps = {
   title: string
   tags: string[]
   cost: number
+  imageUrl: string
+  imageAltText: string
   addToCartHandler: () => void
   readMoreLink: string
 }
 
-const ShopItem = ({ title, tags, cost, addToCartHandler }: ShopItemProps) => {
+const ShopItem = ({
+  title,
+  tags,
+  cost,
+  imageUrl,
+  imageAltText,
+  addToCartHandler,
+}: ShopItemProps) => {
   const formatter = new Intl.NumberFormat('en-UK')
   return (
-    <Card>
-      <CardBody>
+    <>
+      <Card
+        direction={{ base: 'column', sm: 'row' }}
+        overflow="hidden"
+        variant="outline"
+      >
         <Image
-          src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-          alt="Green double couch with wooden legs"
-          borderRadius="lg"
+          bgColor="black"
+          objectFit="cover"
+          maxW={{ base: '100%', sm: '200px' }}
+          src={`http://localhost:1337${imageUrl}`}
+          alt={imageAltText}
         />
-        <Stack mt="6" spacing="3">
-          <Box>
-            <Heading size="md" as="h3">
-              {title}
-            </Heading>
-            <Stack as={List} direction="row">
-              {tags.map((tag) => (
-                <ListItem key={tag}>
-                  <Badge variant="outline">{tag}</Badge>
-                </ListItem>
-              ))}
+        <Stack>
+          <CardBody paddingBottom={1}>
+            <Stack spacing={4}>
+              <Box>
+                <Heading size="md">{title}</Heading>
+                <Stack as={List} direction="row">
+                  {tags.map((tag) => (
+                    <ListItem key={tag}>
+                      <Badge variant="outline">{tag}</Badge>
+                    </ListItem>
+                  ))}
+                </Stack>
+              </Box>
+              <Text fontSize="2xl">
+                <Text
+                  as="span"
+                  fontFamily="aurebeshregular"
+                  aria-label="Credits: "
+                >
+                  d
+                </Text>
+                {formatter.format(cost)}
+              </Text>
             </Stack>
-          </Box>
-          <Text fontSize="2xl">
-            <Text as="span" fontFamily="aurebeshregular" aria-label="Credits: ">
-              d
-            </Text>
-            {formatter.format(cost)}
-          </Text>
+          </CardBody>
+          <CardFooter paddingTop={1}>
+            <Stack direction="row">
+              <Button
+                variant="solid"
+                colorScheme="orange"
+                size="sm"
+                onClick={() => addToCartHandler()}
+              >
+                Add to Cart
+              </Button>
+              <Button variant="ghost" colorScheme="orange" size="sm">
+                Read More
+              </Button>
+            </Stack>
+          </CardFooter>
         </Stack>
-      </CardBody>
-      <Divider />
-      <CardFooter>
-        <Stack direction="row">
-          <Button
-            variant="solid"
-            colorScheme="orange"
-            size="sm"
-            onClick={() => addToCartHandler()}
-          >
-            Add to Cart
-          </Button>
-          <Button variant="ghost" colorScheme="orange" size="sm">
-            Read More
-          </Button>
-        </Stack>
-      </CardFooter>
-    </Card>
+      </Card>
+    </>
   )
 }
 

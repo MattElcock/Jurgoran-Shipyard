@@ -4,7 +4,7 @@ import getConfig from 'next/config'
 const { publicRuntimeConfig } = getConfig()
 
 const client = new ApolloClient({
-  uri: publicRuntimeConfig.databaseURI,
+  uri: `${publicRuntimeConfig.databaseURI}/graphql`,
   cache: new InMemoryCache(),
 })
 
