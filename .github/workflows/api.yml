@@ -10,8 +10,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    run:
-      working-directory: api
+    defaults:
+      run:
+        working-directory: api
     steps:
       # Check-out your repository.
       - name: Checkout
