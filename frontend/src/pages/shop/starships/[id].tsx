@@ -48,11 +48,9 @@ const StarshipDetailPage = () => {
     <Stack spacing={5}>
       <Stack spacing={3}>
         <Image
-          padding={3}
           bgColor="black"
           objectFit="cover"
           width="100%"
-          height="15rem"
           src={data.imageUrl}
           alt={data.imageAlt}
         />
