@@ -98,8 +98,8 @@ const Shop = () => {
                 title={starship.name}
                 tags={[starship.type, starship.subtype]}
                 cost={starship.cost}
-                imageUrl={starship.image.data.attributes.url}
-                imageAltText={starship.image.data.attributes.alternativeText}
+                imageUrl={starship.imageUrl}
+                imageAltText={starship.imageAlt}
                 addToCartHandler={() => addToCartHandler(starship)}
                 readMoreLink={''}
               />
