@@ -1,4 +1,4 @@
-import { Box, Stack } from '@chakra-ui/react'
+import { Box, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -24,6 +24,10 @@ const Header = () => {
       </Link>
 
       <Stack direction="row" gap={2}>
+        <Link href="/shop/starships" passHref>
+          <Text fontWeight="semibold">Starships</Text>
+        </Link>
+
         <DynamicCartButton />
       </Stack>
     </Box>

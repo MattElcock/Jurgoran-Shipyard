@@ -68,19 +68,17 @@ const Summary = ({
           <Stack spacing={2}>
             <Text fontWeight="bold">
               Total Cost:{' '}
-              <Box>
-                <Text
-                  as="span"
-                  fontWeight="normal"
-                  fontFamily="aurebeshregular"
-                  aria-label={`${totalCost} credits.`}
-                >
-                  d
-                </Text>
-                <Text fontWeight="normal" as="span">
-                  {formatter.format(totalCost)}
-                </Text>
-              </Box>
+              <Text
+                as="span"
+                fontWeight="normal"
+                fontFamily="aurebeshregular"
+                aria-label={`${totalCost} credits.`}
+              >
+                d
+              </Text>
+              <Text fontWeight="normal" as="span">
+                {formatter.format(totalCost)}
+              </Text>
             </Text>
             <Text fontWeight="bold">Items:</Text>
             <UnorderedList paddingLeft={5}>
