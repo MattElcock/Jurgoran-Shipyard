@@ -44,11 +44,9 @@ const ShopItem = ({
         variant="outline"
       >
         <Image
-          padding={3}
           bgColor="black"
           objectFit="cover"
           maxW={{ base: '100%', sm: '200px' }}
-          height="15rem"
           src={imageUrl}
           alt={imageAltText}
         />
