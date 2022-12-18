@@ -14,7 +14,6 @@ import {
   DrawerOverlay,
   Radio,
   RadioGroup,
-  DrawerFooter,
   Select,
   Box,
 } from '@chakra-ui/react'
@@ -73,6 +72,7 @@ const Shop = () => {
             width="50%"
             justifyContent="space-between"
             variant="outline"
+            fontWeight="normal"
             borderRightRadius={0}
             onClick={() => handleFiltersClick()}
           >
@@ -83,7 +83,6 @@ const Shop = () => {
             borderLeft="0"
             borderLeftRadius={0}
             borderColor="gray.700"
-            fontWeight="semibold"
             value={sort}
             onChange={(sort) => handleSortChange(sort.target.value)}
           >
@@ -95,6 +94,7 @@ const Shop = () => {
           {data?.map((starship) => (
             <ListItem key={starship.id}>
               <ShopItem
+                id={starship.id}
                 title={starship.name}
                 tags={[starship.type, starship.subtype]}
                 cost={starship.cost}
@@ -165,18 +165,16 @@ const Shop = () => {
                   </Stack>
                 </RadioGroup>
               </Stack>
+              <Button
+                width="full"
+                colorScheme="orange"
+                onClick={() => handleShowOptions()}
+              >
+                Show {(data || []).length} result
+                {((data || []).length > 1 || (data || []).length === 0) && 's'}
+              </Button>
             </Stack>
           </DrawerBody>
-          <DrawerFooter>
-            <Button
-              width="full"
-              colorScheme="orange"
-              onClick={() => handleShowOptions()}
-            >
-              Show {(data || []).length} result
-              {((data || []).length > 1 || (data || []).length === 0) && 's'}
-            </Button>
-          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>

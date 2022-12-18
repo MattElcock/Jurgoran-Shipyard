@@ -17,10 +17,6 @@
       "unique": true,
       "required": true
     },
-    "description": {
-      "type": "text",
-      "required": true
-    },
     "cost": {
       "type": "decimal",
       "required": true
@@ -72,6 +68,10 @@
     },
     "imageAlt": {
       "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext",
       "required": true
     }
   }
