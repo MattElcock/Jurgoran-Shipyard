@@ -43,14 +43,6 @@
       "component": "armament.weapon-configuration",
       "required": true
     },
-    "image": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images"
-      ]
-    },
     "type": {
       "type": "enumeration",
       "enum": [
@@ -72,6 +64,14 @@
         "strikeFighter",
         "interceptor"
       ],
+      "required": true
+    },
+    "imageUrl": {
+      "type": "string",
+      "required": true
+    },
+    "imageAlt": {
+      "type": "string",
       "required": true
     }
   }

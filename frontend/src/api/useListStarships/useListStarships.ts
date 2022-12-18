@@ -8,26 +8,13 @@ type StarshipReturn = {
   attributes: Starship
 }
 
-type Image = {
-  url: string
-  alternativeText: string
-}
-
-type ImageData = {
-  data: ImageReturn
-}
-
-type ImageReturn = {
-  id: string
-  attributes: Image
-}
-
 type Starship = {
   name: string
   type: string
   subtype: string
   cost: number
-  image: ImageData
+  imageUrl: string
+  imageAlt: string
 }
 
 export interface StarshipState extends Starship {
@@ -54,14 +41,8 @@ const useListStarships = (type: string, subtype: string, sort: string) => {
                   type
                   subtype
                   cost
-                  image {
-                    data {
-                      attributes {
-                        url
-                        alternativeText
-                      }
-                    }
-                  }
+                  imageUrl
+                  imageAlt
                 }
               }
             }
