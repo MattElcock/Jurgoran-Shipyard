@@ -14,7 +14,6 @@ import {
   DrawerOverlay,
   Radio,
   RadioGroup,
-  DrawerFooter,
   Select,
   Box,
 } from '@chakra-ui/react'
