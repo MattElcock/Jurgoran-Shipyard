@@ -7,7 +7,7 @@ import {
   UnorderedList,
   Button,
 } from '@chakra-ui/react'
-import { useShoppingCart } from '../providers/ShoppingCartProvider'
+import { useShoppingCart } from 'providers/ShoppingCartProvider'
 import { Inputs as CustomerDetails } from './CustomerDetails'
 import { Inputs as OrderDetails } from './OrderDetails'
 

@@ -3,17 +3,17 @@ import { useState } from 'react'
 import {
   CustomerDetails,
   Inputs as CustomerDetailsInputs,
-} from 'containers/CustomerDetails'
+} from 'containers/OrderSteps/CustomerDetails'
 import {
   OrderDetails,
   Inputs as OrderDetailsInputs,
-} from 'containers/OrderDetails'
+} from 'containers/OrderSteps/OrderDetails'
 import { CollapsibleAlert } from 'components/CollapsibleAlert'
-import { Summary } from 'containers/Summary'
+import { Summary } from 'containers/OrderSteps/Summary'
 import { useCreateOrder } from 'api/useCreateOrder'
 import { useShoppingCart } from 'providers/ShoppingCartProvider'
 import { OrderInput } from 'api/useCreateOrder/useCreateOrder'
-import { Success } from 'containers/Success'
+import { Success } from 'containers/OrderSteps/Success'
 
 const Checkout = () => {
   const { execute } = useCreateOrder()
