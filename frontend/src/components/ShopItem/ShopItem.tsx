@@ -12,8 +12,10 @@ import {
   CardFooter,
   Box,
 } from '@chakra-ui/react'
+import Link from 'next/link'
 
 type ShopItemProps = {
+  id: string
   title: string
   tags: string[]
   cost: number
@@ -24,6 +26,7 @@ type ShopItemProps = {
 }
 
 const ShopItem = ({
+  id,
   title,
   tags,
   cost,
@@ -45,6 +48,7 @@ const ShopItem = ({
           bgColor="black"
           objectFit="cover"
           maxW={{ base: '100%', sm: '200px' }}
+          height="15rem"
           src={imageUrl}
           alt={imageAltText}
         />
@@ -56,7 +60,9 @@ const ShopItem = ({
                 <Stack as={List} direction="row">
                   {tags.map((tag) => (
                     <ListItem key={tag}>
-                      <Badge variant="outline">{tag}</Badge>
+                      <Badge variant="outline" fontSize="xs">
+                        {tag}
+                      </Badge>
                     </ListItem>
                   ))}
                 </Stack>
@@ -78,14 +84,16 @@ const ShopItem = ({
               <Button
                 variant="solid"
                 colorScheme="orange"
-                size="sm"
+                size="md"
                 onClick={() => addToCartHandler()}
               >
                 Add to Cart
               </Button>
-              <Button variant="ghost" colorScheme="orange" size="sm">
-                Read More
-              </Button>
+              <Link href={`/shop/starships/${id}`} passHref>
+                <Button variant="ghost" colorScheme="orange" size="md">
+                  Read More
+                </Button>
+              </Link>
             </Stack>
           </CardFooter>
         </Stack>
