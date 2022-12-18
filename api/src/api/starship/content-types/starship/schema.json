@@ -54,20 +54,22 @@
     "type": {
       "type": "enumeration",
       "enum": [
-        "starfighter",
-        "capitalShip",
-        "supportShip",
-        "transportShip"
+        "dreadnought",
+        "destroyer",
+        "support",
+        "starfighter"
       ],
       "required": true
     },
     "subtype": {
       "type": "enumeration",
       "enum": [
+        "transport",
+        "strategic",
         "bomber",
         "gunship",
         "scout",
-        "strikefighter",
+        "strikeFighter",
         "interceptor"
       ],
       "required": true

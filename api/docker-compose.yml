@@ -2,7 +2,9 @@ version: '3'
 services:
   jurgoran_shipyard_api:
     container_name: jurgoran_shipyard_api
-    build: ./Dockerfile.dev
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     image: jurgoran_shipyard_api:latest
     restart: unless-stopped
     env_file: .env

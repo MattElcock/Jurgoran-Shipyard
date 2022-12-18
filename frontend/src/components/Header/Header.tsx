@@ -1,24 +1,11 @@
-import {
-  Box,
-  Drawer,
-  DrawerContent,
-  DrawerOverlay,
-  Icon,
-  IconButton,
-  useDisclosure,
-  Stack,
-  Text,
-} from '@chakra-ui/react'
-import { HamburgerIcon } from '@chakra-ui/icons'
-import React, { useRef } from 'react'
+import { Box, Icon, IconButton, Stack, Text } from '@chakra-ui/react'
+import React from 'react'
 import Image from 'next/image'
 import { MdShoppingCart } from 'react-icons/md'
 import { useShoppingCart } from 'providers/ShoppingCartProvider'
 import Link from 'next/link'
 
 const Header = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = useRef<HTMLButtonElement>(null)
   const { shoppingCart } = useShoppingCart()
 
   return (
@@ -62,26 +49,7 @@ const Header = () => {
             )}
           </Box>
         </Link>
-
-        <IconButton
-          ref={btnRef}
-          onClick={onOpen}
-          icon={<HamburgerIcon w={7} h={7} />}
-          aria-label="Menu"
-          color="white"
-          variant="link"
-        />
       </Stack>
-
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onClose}
-        finalFocusRef={btnRef}
-      >
-        <DrawerOverlay />
-        <DrawerContent bg="gray.800"></DrawerContent>
-      </Drawer>
     </Box>
   )
 }

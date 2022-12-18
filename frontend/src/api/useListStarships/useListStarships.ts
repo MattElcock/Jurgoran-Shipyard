@@ -34,7 +34,7 @@ export interface StarshipState extends Starship {
   id: string
 }
 
-const useListStarships = () => {
+const useListStarships = (type: string, subtype: string, sort: string) => {
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState<StarshipState[]>()
   const apiClient = client
@@ -45,8 +45,8 @@ const useListStarships = () => {
 
       const response = await apiClient.query({
         query: gql`
-          query Starships {
-            starships {
+          query Starships($filters: StarshipFiltersInput, $sort: [String]) {
+            starships(filters: $filters, sort: $sort) {
               data {
                 id
                 attributes {
@@ -67,6 +67,21 @@ const useListStarships = () => {
             }
           }
         `,
+        variables: {
+          filters: {
+            ...(type && {
+              type: {
+                eq: type,
+              },
+            }),
+            ...(subtype && {
+              subtype: {
+                eq: subtype,
+              },
+            }),
+          },
+          sort: [`cost:${sort}`],
+        },
       })
 
       setData(
@@ -84,7 +99,7 @@ const useListStarships = () => {
     }
 
     fetchData()
-  }, [apiClient])
+  }, [apiClient, type, subtype, sort])
 
   return { isLoading, data }
 }
