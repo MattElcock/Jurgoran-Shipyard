@@ -1,11 +1,11 @@
-import { Box, Container } from "@chakra-ui/react";
-import { ReactNode } from "react";
-import { Footer } from "components/Footer";
-import { Header } from "components/Header";
+import { Box, Container } from '@chakra-ui/react'
+import { ReactNode } from 'react'
+import { Footer } from 'components/Footer'
+import { Header } from 'components/Header'
 
 type AppLayoutProps = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 const AppLayout = ({ children }: AppLayoutProps) => {
   return (
@@ -21,20 +21,20 @@ const AppLayout = ({ children }: AppLayoutProps) => {
       gap={5}
     >
       <Box as="header" gridArea="header" bg="gray.900" paddingY={3}>
-        <Container>
+        <Container maxW={{ lg: 'container.lg' }}>
           <Header />
         </Container>
       </Box>
       <Box as="main" gridArea="main">
-        <Container>{children}</Container>
+        <Container maxW={{ lg: 'container.lg' }}>{children}</Container>
       </Box>
       <Box as="footer" gridArea="footer" paddingY={5}>
-        <Container>
+        <Container maxW={{ lg: 'container.lg' }}>
           <Footer />
         </Container>
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export { AppLayout };
+export { AppLayout }
