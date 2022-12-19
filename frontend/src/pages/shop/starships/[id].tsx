@@ -1,5 +1,10 @@
 import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
   Badge,
+  Box,
   Button,
   Heading,
   Image,
@@ -36,7 +41,12 @@ const StarshipDetailPage = () => {
   const addToCartHandler = (starship: StarshipState) => {
     updateShoppingCart([
       ...shoppingCart,
-      { name: starship.name, cost: starship.cost, id: starship.id },
+      {
+        name: starship.name,
+        cost: starship.cost,
+        id: starship.id,
+        requesition: starship.requisition,
+      },
     ])
   }
 
@@ -70,12 +80,30 @@ const StarshipDetailPage = () => {
               </ListItem>
             </Stack>
           </Stack>
-          <Text fontSize="2xl">
-            <Text as="span" fontFamily="aurebeshregular" aria-label="Credits: ">
-              d
+          {data.requisition ? (
+            <Alert>
+              <AlertIcon alignSelf="start" />
+              <Box>
+                <AlertTitle>Requesition Exclusive</AlertTitle>
+                <AlertDescription>
+                  This product cannot be bought. After placing your order, you
+                  will need to present a requisition order from Imperial
+                  Command.
+                </AlertDescription>
+              </Box>
+            </Alert>
+          ) : (
+            <Text fontSize="2xl">
+              <Text
+                as="span"
+                fontFamily="aurebeshregular"
+                aria-label="Credits: "
+              >
+                d
+              </Text>
+              {formatter.format(data.cost)}
             </Text>
-            {formatter.format(data.cost)} per unit
-          </Text>
+          )}
           <ReactMarkdown components={ChakraUIRenderer()}>
             {data.description}
           </ReactMarkdown>

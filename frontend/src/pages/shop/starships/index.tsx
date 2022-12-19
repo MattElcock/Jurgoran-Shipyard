@@ -37,7 +37,12 @@ const Shop = () => {
   const addToCartHandler = (starship: StarshipState) => {
     updateShoppingCart([
       ...shoppingCart,
-      { name: starship.name, cost: starship.cost, id: starship.id },
+      {
+        name: starship.name,
+        cost: starship.cost,
+        id: starship.id,
+        requesition: starship.requisition,
+      },
     ])
   }
 
@@ -104,6 +109,7 @@ const Shop = () => {
                 cost={starship.cost}
                 imageUrl={starship.imageUrl}
                 imageAltText={starship.imageAlt}
+                requesition={starship.requisition}
                 addToCartHandler={() => addToCartHandler(starship)}
                 readMoreLink={''}
               />

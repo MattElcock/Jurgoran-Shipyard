@@ -3,6 +3,7 @@ import { Box, Button, ButtonGroup, Stack, Text } from '@chakra-ui/react'
 type CartSummaryItemProps = {
   name: string
   costPerItem: number
+  requesition: boolean
   quantity: number
   removeFromBasketHandler?: () => void
 }
@@ -10,6 +11,7 @@ type CartSummaryItemProps = {
 const CartSummaryItem = ({
   name,
   costPerItem,
+  requesition,
   quantity,
   removeFromBasketHandler,
 }: CartSummaryItemProps) => {
@@ -21,29 +23,37 @@ const CartSummaryItem = ({
         <Stack spacing="0.5">
           <Box display="flex" justifyContent="space-between">
             <Text fontWeight="medium">{name}</Text>
-            <Text fontWeight="medium">
+            {!requesition && (
+              <Text fontWeight="medium">
+                <Text
+                  as="span"
+                  fontFamily="aurebeshregular"
+                  aria-label={`${totalCost} credits.`}
+                >
+                  d
+                </Text>
+                {formatter.format(totalCost)}
+              </Text>
+            )}
+          </Box>
+          {requesition ? (
+            <Text color="gray.400" fontSize="sm">
+              Requesition Exclusive
+            </Text>
+          ) : (
+            <Text color="gray.400" fontSize="sm">
+              Cost per item:{' '}
               <Text
                 as="span"
                 fontFamily="aurebeshregular"
-                aria-label={`${totalCost} credits.`}
+                aria-label={`${costPerItem} credits.`}
               >
                 d
               </Text>
-              {formatter.format(totalCost)}
+              {formatter.format(costPerItem)}
             </Text>
-          </Box>
+          )}
 
-          <Text color="gray.400" fontSize="sm">
-            Cost per item:{' '}
-            <Text
-              as="span"
-              fontFamily="aurebeshregular"
-              aria-label={`${costPerItem} credits.`}
-            >
-              d
-            </Text>
-            {formatter.format(costPerItem)}
-          </Text>
           <Text color="gray.400" fontSize="sm">
             {`Quantity: ${quantity}`}
           </Text>
