@@ -16,6 +16,7 @@ import { useRouter } from 'next/router'
 import { useShoppingCart } from 'providers/ShoppingCartProvider'
 import ReactMarkdown from 'react-markdown'
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer'
+import Head from 'next/head'
 
 const StarshipDetailPage = () => {
   const router = useRouter()
@@ -45,60 +46,65 @@ const StarshipDetailPage = () => {
   }))
 
   return (
-    <Stack spacing={5}>
-      <Stack spacing={3}>
-        <Image
-          bgColor="black"
-          objectFit="cover"
-          width="100%"
-          src={data.imageUrl}
-          alt={data.imageAlt}
-        />
-        <Stack spacing={1}>
-          <Heading>{data.name}</Heading>
-          <Stack as={List} direction="row">
-            <ListItem>
-              <Badge variant="outline">{data.type}</Badge>
-            </ListItem>
-            <ListItem>
-              <Badge variant="outline">{data.subtype}</Badge>
-            </ListItem>
+    <>
+      <Head>
+        <title>{data.name} | Jurgoran Shipyard</title>
+      </Head>
+      <Stack spacing={5}>
+        <Stack spacing={3}>
+          <Image
+            bgColor="black"
+            objectFit="cover"
+            width="100%"
+            src={data.imageUrl}
+            alt={data.imageAlt}
+          />
+          <Stack spacing={1}>
+            <Heading>{data.name}</Heading>
+            <Stack as={List} direction="row">
+              <ListItem>
+                <Badge variant="outline">{data.type}</Badge>
+              </ListItem>
+              <ListItem>
+                <Badge variant="outline">{data.subtype}</Badge>
+              </ListItem>
+            </Stack>
           </Stack>
-        </Stack>
-        <Text fontSize="2xl">
-          <Text as="span" fontFamily="aurebeshregular" aria-label="Credits: ">
-            d
+          <Text fontSize="2xl">
+            <Text as="span" fontFamily="aurebeshregular" aria-label="Credits: ">
+              d
+            </Text>
+            {formatter.format(data.cost)} per unit
           </Text>
-          {formatter.format(data.cost)} per unit
-        </Text>
-        <ReactMarkdown components={ChakraUIRenderer()}>
-          {data.description}
-        </ReactMarkdown>
-        <Heading size="lg">Armament</Heading>
-        <UnorderedList paddingLeft={5}>
-          {armament.map((weapon) => (
-            <ListItem key={weapon.name}>
-              <Text>{`${weapon.quantity} x ${weapon.name}`}</Text>
-            </ListItem>
-          ))}
-        </UnorderedList>
-      </Stack>
-      <Stack direction="row">
-        <Button
-          variant="solid"
-          colorScheme="orange"
-          size="md"
-          onClick={() => addToCartHandler({ id: starshipId, ...data })}
-        >
-          Add to Cart
-        </Button>
-        <Link href={`/shop/starships`} passHref>
-          <Button variant="ghost" colorScheme="orange" size="md">
-            Back to Shop
+          <ReactMarkdown components={ChakraUIRenderer()}>
+            {data.description}
+          </ReactMarkdown>
+          <Heading size="lg">Armament</Heading>
+          <UnorderedList paddingLeft={5}>
+            {armament.map((weapon) => (
+              <ListItem key={weapon.name}>
+                <Text>{`${weapon.quantity} x ${weapon.name}`}</Text>
+              </ListItem>
+            ))}
+          </UnorderedList>
+        </Stack>
+        <Stack direction="row">
+          <Button
+            variant="solid"
+            colorScheme="orange"
+            size="md"
+            onClick={() => addToCartHandler({ id: starshipId, ...data })}
+          >
+            Add to Cart
           </Button>
-        </Link>
+          <Link href={`/shop/starships`} passHref>
+            <Button variant="ghost" colorScheme="orange" size="md">
+              Back to Shop
+            </Button>
+          </Link>
+        </Stack>
       </Stack>
-    </Stack>
+    </>
   )
 }
 

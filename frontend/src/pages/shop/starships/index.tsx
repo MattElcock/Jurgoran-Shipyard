@@ -24,6 +24,7 @@ import { useShoppingCart } from 'providers/ShoppingCartProvider'
 import { MdFilterList } from 'react-icons/md'
 import { useState } from 'react'
 import { camelCase } from 'lodash'
+import Head from 'next/head'
 
 const Shop = () => {
   const [typeFilter, setTypeFilter] = useState('')
@@ -63,6 +64,9 @@ const Shop = () => {
 
   return (
     <>
+      <Head>
+        <title>Starships | Jurgoran Shipyard</title>
+      </Head>
       <Stack spacing={5}>
         <Heading as="h1">All Starships</Heading>
         <Box display="flex">
