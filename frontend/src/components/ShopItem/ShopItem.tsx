@@ -48,25 +48,28 @@ const ShopItem = ({
       <Image
         bgColor="black"
         objectFit="cover"
-        maxW={{ base: '100%', sm: '200px' }}
+        maxW={{ base: '100%', md: '300px' }}
         src={imageUrl}
         alt={imageAltText}
       />
       <Stack>
         <CardBody paddingBottom={1}>
-          <Stack spacing={4}>
-            <Box>
+          <Stack spacing={{ base: 4, md: 4 }}>
+            <Stack>
               <Heading size="md">{title}</Heading>
               <Stack as={List} direction="row">
                 {tags.map((tag) => (
                   <ListItem key={tag}>
-                    <Badge variant="outline" fontSize="xs">
+                    <Badge
+                      variant="outline"
+                      fontSize={{ base: 'xs', md: 'sm' }}
+                    >
                       {tag}
                     </Badge>
                   </ListItem>
                 ))}
               </Stack>
-            </Box>
+            </Stack>
             {requisition ? (
               <Box display="flex" alignItems="center" gap={2}>
                 <InfoIcon color="blue.100" w={5} h={5} />{' '}
