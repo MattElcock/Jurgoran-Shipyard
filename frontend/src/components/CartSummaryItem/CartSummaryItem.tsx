@@ -38,7 +38,7 @@ const CartSummaryItem = ({
           </Box>
           {requisition ? (
             <Text color="gray.400" fontSize="sm">
-              requisition exclusive
+              Requisition exclusive
             </Text>
           ) : (
             <Text color="gray.400" fontSize="sm">
