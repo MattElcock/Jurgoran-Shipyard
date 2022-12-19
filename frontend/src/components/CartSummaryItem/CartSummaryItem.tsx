@@ -3,7 +3,7 @@ import { Box, Button, ButtonGroup, Stack, Text } from '@chakra-ui/react'
 type CartSummaryItemProps = {
   name: string
   costPerItem: number
-  requesition: boolean
+  requisition: boolean
   quantity: number
   removeFromBasketHandler?: () => void
 }
@@ -11,7 +11,7 @@ type CartSummaryItemProps = {
 const CartSummaryItem = ({
   name,
   costPerItem,
-  requesition,
+  requisition,
   quantity,
   removeFromBasketHandler,
 }: CartSummaryItemProps) => {
@@ -23,7 +23,7 @@ const CartSummaryItem = ({
         <Stack spacing="0.5">
           <Box display="flex" justifyContent="space-between">
             <Text fontWeight="medium">{name}</Text>
-            {!requesition && (
+            {!requisition && (
               <Text fontWeight="medium">
                 <Text
                   as="span"
@@ -36,9 +36,9 @@ const CartSummaryItem = ({
               </Text>
             )}
           </Box>
-          {requesition ? (
+          {requisition ? (
             <Text color="gray.400" fontSize="sm">
-              Requesition Exclusive
+              requisition exclusive
             </Text>
           ) : (
             <Text color="gray.400" fontSize="sm">

@@ -42,7 +42,7 @@ const CartSummary = () => {
             {i > 0 && <Divider />}
             <CartSummaryItem
               name={cartItem.name}
-              requesition={cartItem.requesition}
+              requisition={cartItem.requisition}
               costPerItem={cartItem.cost}
               quantity={cartItem.quantity}
               removeFromBasketHandler={() => removeFromBasketHandler(cartItem)}

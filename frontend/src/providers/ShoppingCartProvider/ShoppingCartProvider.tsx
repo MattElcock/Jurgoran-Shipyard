@@ -13,7 +13,7 @@ export type CartItem = {
   id: string
   name: string
   cost: number
-  requesition: boolean
+  requisition: boolean
 }
 
 type ShoppingCartProviderProps = {

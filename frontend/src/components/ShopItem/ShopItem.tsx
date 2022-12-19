@@ -20,7 +20,7 @@ type ShopItemProps = {
   title: string
   tags: string[]
   cost: number
-  requesition: boolean
+  requisition: boolean
   imageUrl: string
   imageAltText: string
   addToCartHandler: () => void
@@ -32,7 +32,7 @@ const ShopItem = ({
   title,
   tags,
   cost,
-  requesition,
+  requisition,
   imageUrl,
   imageAltText,
   addToCartHandler,
@@ -67,10 +67,10 @@ const ShopItem = ({
                 ))}
               </Stack>
             </Box>
-            {requesition ? (
+            {requisition ? (
               <Box display="flex" alignItems="center" gap={2}>
                 <InfoIcon color="blue.100" w={5} h={5} />{' '}
-                <Text>Requesition Exclusive</Text>
+                <Text>Requisition Exclusive</Text>
               </Box>
             ) : (
               <Text fontSize="2xl">

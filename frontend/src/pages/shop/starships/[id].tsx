@@ -45,7 +45,7 @@ const StarshipDetailPage = () => {
         name: starship.name,
         cost: starship.cost,
         id: starship.id,
-        requesition: starship.requisition,
+        requisition: starship.requisition,
       },
     ])
   }
@@ -84,7 +84,7 @@ const StarshipDetailPage = () => {
             <Alert>
               <AlertIcon alignSelf="start" />
               <Box>
-                <AlertTitle>Requesition Exclusive</AlertTitle>
+                <AlertTitle>Requisition Exclusive</AlertTitle>
                 <AlertDescription>
                   This product cannot be bought. After placing your order, you
                   will need to present a requisition order from Imperial

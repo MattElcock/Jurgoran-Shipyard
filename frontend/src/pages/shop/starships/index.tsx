@@ -41,7 +41,7 @@ const Shop = () => {
         name: starship.name,
         cost: starship.cost,
         id: starship.id,
-        requesition: starship.requisition,
+        requisition: starship.requisition,
       },
     ])
   }
@@ -109,7 +109,7 @@ const Shop = () => {
                 cost={starship.cost}
                 imageUrl={starship.imageUrl}
                 imageAltText={starship.imageAlt}
-                requesition={starship.requisition}
+                requisition={starship.requisition}
                 addToCartHandler={() => addToCartHandler(starship)}
                 readMoreLink={''}
               />
