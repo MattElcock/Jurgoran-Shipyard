@@ -24,6 +24,7 @@ import { useShoppingCart } from 'providers/ShoppingCartProvider'
 import { MdFilterList } from 'react-icons/md'
 import { useState } from 'react'
 import { camelCase } from 'lodash'
+import Head from 'next/head'
 
 const Shop = () => {
   const [typeFilter, setTypeFilter] = useState('')
@@ -36,7 +37,12 @@ const Shop = () => {
   const addToCartHandler = (starship: StarshipState) => {
     updateShoppingCart([
       ...shoppingCart,
-      { name: starship.name, cost: starship.cost, id: starship.id },
+      {
+        name: starship.name,
+        cost: starship.cost,
+        id: starship.id,
+        requesition: starship.requisition,
+      },
     ])
   }
 
@@ -63,6 +69,9 @@ const Shop = () => {
 
   return (
     <>
+      <Head>
+        <title>Starships | Jurgoran Shipyard</title>
+      </Head>
       <Stack spacing={5}>
         <Heading as="h1">All Starships</Heading>
         <Box display="flex">
@@ -100,6 +109,7 @@ const Shop = () => {
                 cost={starship.cost}
                 imageUrl={starship.imageUrl}
                 imageAltText={starship.imageAlt}
+                requesition={starship.requisition}
                 addToCartHandler={() => addToCartHandler(starship)}
                 readMoreLink={''}
               />

@@ -20,6 +20,7 @@ type Starship = {
   type: string
   subtype: string
   cost: number
+  requisition: boolean
   imageUrl: string
   imageAlt: string
   description: string
@@ -58,6 +59,7 @@ const useGetStarship = (id: string) => {
                   imageUrl
                   imageAlt
                   description
+                  requisition
                   armament {
                     quantity
                     weapon {

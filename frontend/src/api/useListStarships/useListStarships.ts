@@ -13,6 +13,7 @@ type Starship = {
   type: string
   subtype: string
   cost: number
+  requisition: boolean
   imageUrl: string
   imageAlt: string
 }
@@ -43,6 +44,7 @@ const useListStarships = (type: string, subtype: string, sort: string) => {
                   cost
                   imageUrl
                   imageAlt
+                  requisition
                 }
               }
             }

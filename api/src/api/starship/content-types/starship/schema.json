@@ -73,6 +73,11 @@
     "description": {
       "type": "richtext",
       "required": true
+    },
+    "requisition": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }

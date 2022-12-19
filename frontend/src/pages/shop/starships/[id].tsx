@@ -1,5 +1,10 @@
 import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
   Badge,
+  Box,
   Button,
   Heading,
   Image,
@@ -16,6 +21,7 @@ import { useRouter } from 'next/router'
 import { useShoppingCart } from 'providers/ShoppingCartProvider'
 import ReactMarkdown from 'react-markdown'
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer'
+import Head from 'next/head'
 
 const StarshipDetailPage = () => {
   const router = useRouter()
@@ -35,7 +41,12 @@ const StarshipDetailPage = () => {
   const addToCartHandler = (starship: StarshipState) => {
     updateShoppingCart([
       ...shoppingCart,
-      { name: starship.name, cost: starship.cost, id: starship.id },
+      {
+        name: starship.name,
+        cost: starship.cost,
+        id: starship.id,
+        requesition: starship.requisition,
+      },
     ])
   }
 
@@ -45,60 +56,83 @@ const StarshipDetailPage = () => {
   }))
 
   return (
-    <Stack spacing={5}>
-      <Stack spacing={3}>
-        <Image
-          bgColor="black"
-          objectFit="cover"
-          width="100%"
-          src={data.imageUrl}
-          alt={data.imageAlt}
-        />
-        <Stack spacing={1}>
-          <Heading>{data.name}</Heading>
-          <Stack as={List} direction="row">
-            <ListItem>
-              <Badge variant="outline">{data.type}</Badge>
-            </ListItem>
-            <ListItem>
-              <Badge variant="outline">{data.subtype}</Badge>
-            </ListItem>
+    <>
+      <Head>
+        <title>{data.name} | Jurgoran Shipyard</title>
+      </Head>
+      <Stack spacing={5}>
+        <Stack spacing={3}>
+          <Image
+            bgColor="black"
+            objectFit="cover"
+            width="100%"
+            src={data.imageUrl}
+            alt={data.imageAlt}
+          />
+          <Stack spacing={1}>
+            <Heading>{data.name}</Heading>
+            <Stack as={List} direction="row">
+              <ListItem>
+                <Badge variant="outline">{data.type}</Badge>
+              </ListItem>
+              <ListItem>
+                <Badge variant="outline">{data.subtype}</Badge>
+              </ListItem>
+            </Stack>
           </Stack>
+          {data.requisition ? (
+            <Alert>
+              <AlertIcon alignSelf="start" />
+              <Box>
+                <AlertTitle>Requesition Exclusive</AlertTitle>
+                <AlertDescription>
+                  This product cannot be bought. After placing your order, you
+                  will need to present a requisition order from Imperial
+                  Command.
+                </AlertDescription>
+              </Box>
+            </Alert>
+          ) : (
+            <Text fontSize="2xl">
+              <Text
+                as="span"
+                fontFamily="aurebeshregular"
+                aria-label="Credits: "
+              >
+                d
+              </Text>
+              {formatter.format(data.cost)}
+            </Text>
+          )}
+          <ReactMarkdown components={ChakraUIRenderer()}>
+            {data.description}
+          </ReactMarkdown>
+          <Heading size="lg">Armament</Heading>
+          <UnorderedList paddingLeft={5}>
+            {armament.map((weapon) => (
+              <ListItem key={weapon.name}>
+                <Text>{`${weapon.quantity} x ${weapon.name}`}</Text>
+              </ListItem>
+            ))}
+          </UnorderedList>
         </Stack>
-        <Text fontSize="2xl">
-          <Text as="span" fontFamily="aurebeshregular" aria-label="Credits: ">
-            d
-          </Text>
-          {formatter.format(data.cost)} per unit
-        </Text>
-        <ReactMarkdown components={ChakraUIRenderer()}>
-          {data.description}
-        </ReactMarkdown>
-        <Heading size="lg">Armament</Heading>
-        <UnorderedList paddingLeft={5}>
-          {armament.map((weapon) => (
-            <ListItem key={weapon.name}>
-              <Text>{`${weapon.quantity} x ${weapon.name}`}</Text>
-            </ListItem>
-          ))}
-        </UnorderedList>
-      </Stack>
-      <Stack direction="row">
-        <Button
-          variant="solid"
-          colorScheme="orange"
-          size="md"
-          onClick={() => addToCartHandler({ id: starshipId, ...data })}
-        >
-          Add to Cart
-        </Button>
-        <Link href={`/shop/starships`} passHref>
-          <Button variant="ghost" colorScheme="orange" size="md">
-            Back to Shop
+        <Stack direction="row">
+          <Button
+            variant="solid"
+            colorScheme="orange"
+            size="md"
+            onClick={() => addToCartHandler({ id: starshipId, ...data })}
+          >
+            Add to Cart
           </Button>
-        </Link>
+          <Link href={`/shop/starships`} passHref>
+            <Button variant="ghost" colorScheme="orange" size="md">
+              Back to Shop
+            </Button>
+          </Link>
+        </Stack>
       </Stack>
-    </Stack>
+    </>
   )
 }
 

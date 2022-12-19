@@ -1,3 +1,4 @@
+import { InfoIcon } from '@chakra-ui/icons'
 import {
   Card,
   CardBody,
@@ -19,6 +20,7 @@ type ShopItemProps = {
   title: string
   tags: string[]
   cost: number
+  requesition: boolean
   imageUrl: string
   imageAltText: string
   addToCartHandler: () => void
@@ -30,6 +32,7 @@ const ShopItem = ({
   title,
   tags,
   cost,
+  requesition,
   imageUrl,
   imageAltText,
   addToCartHandler,
@@ -37,34 +40,39 @@ const ShopItem = ({
   const formatter = new Intl.NumberFormat('en-UK')
 
   return (
-    <>
-      <Card
-        direction={{ base: 'column', sm: 'row' }}
-        overflow="hidden"
-        variant="outline"
-      >
-        <Image
-          bgColor="black"
-          objectFit="cover"
-          maxW={{ base: '100%', sm: '200px' }}
-          src={imageUrl}
-          alt={imageAltText}
-        />
-        <Stack>
-          <CardBody paddingBottom={1}>
-            <Stack spacing={4}>
-              <Box>
-                <Heading size="md">{title}</Heading>
-                <Stack as={List} direction="row">
-                  {tags.map((tag) => (
-                    <ListItem key={tag}>
-                      <Badge variant="outline" fontSize="xs">
-                        {tag}
-                      </Badge>
-                    </ListItem>
-                  ))}
-                </Stack>
+    <Card
+      direction={{ base: 'column', sm: 'row' }}
+      overflow="hidden"
+      variant="outline"
+    >
+      <Image
+        bgColor="black"
+        objectFit="cover"
+        maxW={{ base: '100%', sm: '200px' }}
+        src={imageUrl}
+        alt={imageAltText}
+      />
+      <Stack>
+        <CardBody paddingBottom={1}>
+          <Stack spacing={4}>
+            <Box>
+              <Heading size="md">{title}</Heading>
+              <Stack as={List} direction="row">
+                {tags.map((tag) => (
+                  <ListItem key={tag}>
+                    <Badge variant="outline" fontSize="xs">
+                      {tag}
+                    </Badge>
+                  </ListItem>
+                ))}
+              </Stack>
+            </Box>
+            {requesition ? (
+              <Box display="flex" alignItems="center" gap={2}>
+                <InfoIcon color="blue.100" w={5} h={5} />{' '}
+                <Text>Requesition Exclusive</Text>
               </Box>
+            ) : (
               <Text fontSize="2xl">
                 <Text
                   as="span"
@@ -75,28 +83,28 @@ const ShopItem = ({
                 </Text>
                 {formatter.format(cost)}
               </Text>
-            </Stack>
-          </CardBody>
-          <CardFooter paddingTop={1}>
-            <Stack direction="row">
-              <Button
-                variant="solid"
-                colorScheme="orange"
-                size="md"
-                onClick={() => addToCartHandler()}
-              >
-                Add to Cart
+            )}
+          </Stack>
+        </CardBody>
+        <CardFooter paddingTop={1}>
+          <Stack direction="row">
+            <Button
+              variant="solid"
+              colorScheme="orange"
+              size="md"
+              onClick={() => addToCartHandler()}
+            >
+              Add to Cart
+            </Button>
+            <Link href={`/shop/starships/${id}`} passHref>
+              <Button variant="ghost" colorScheme="orange" size="md">
+                Read More
               </Button>
-              <Link href={`/shop/starships/${id}`} passHref>
-                <Button variant="ghost" colorScheme="orange" size="md">
-                  Read More
-                </Button>
-              </Link>
-            </Stack>
-          </CardFooter>
-        </Stack>
-      </Card>
-    </>
+            </Link>
+          </Stack>
+        </CardFooter>
+      </Stack>
+    </Card>
   )
 }
 
