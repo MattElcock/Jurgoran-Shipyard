@@ -9,41 +9,41 @@ import {
   Button,
   Checkbox,
   FormErrorMessage,
-} from "@chakra-ui/react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+} from '@chakra-ui/react'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 export type Inputs = {
-  name: string;
-  discordID: string;
-  powerbase: string;
-  role: string;
-  liabilityWaiver: boolean;
-};
+  name: string
+  discordID: string
+  powerbase: string
+  role: string
+  liabilityWaiver: boolean
+}
 
 type CustomerDetailsProps = {
-  data: Inputs;
-  handleNext: (data: Inputs) => void;
-};
+  data: Inputs
+  handleNext: (data: Inputs) => void
+}
 
 const useSchema = () => {
   const schema = yup.object().shape({
-    name: yup.string().required("Required"),
+    name: yup.string().required('Required'),
     discordID: yup
       .string()
-      .required("Required")
-      .matches(/^.{3,32}#[0-9]{4}$/, "Invalid format"),
-    powerbase: yup.string().required("Required"),
-    role: yup.string().required("Required"),
-    liabilityWaiver: yup.bool().isTrue("Required"),
-  });
+      .required('Required')
+      .matches(/^.{3,32}#[0-9]{4}$/, 'Invalid format'),
+    powerbase: yup.string().required('Required'),
+    role: yup.string().required('Required'),
+    liabilityWaiver: yup.bool().isTrue('Required'),
+  })
 
-  return schema;
-};
+  return schema
+}
 
 const CustomerDetails = ({ handleNext, data }: CustomerDetailsProps) => {
-  const schema = useSchema();
+  const schema = useSchema()
 
   const {
     register,
@@ -52,16 +52,19 @@ const CustomerDetails = ({ handleNext, data }: CustomerDetailsProps) => {
   } = useForm<Inputs>({
     resolver: yupResolver(schema),
     defaultValues: { ...data },
-  });
+  })
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => handleNext(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => handleNext(data)
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={4}>
-        <FormControl isInvalid={Boolean(errors.name)}>
+        <FormControl
+          isInvalid={Boolean(errors.name)}
+          width={{ base: '100%', md: '25rem' }}
+        >
           <FormLabel>What is your name?</FormLabel>
-          <Input {...register("name")} />
+          <Input {...register('name')} />
           {errors.name && (
             <FormErrorMessage>{errors.name.message}</FormErrorMessage>
           )}
@@ -69,14 +72,17 @@ const CustomerDetails = ({ handleNext, data }: CustomerDetailsProps) => {
             Please include your primary title, if you have one.
           </FormHelperText>
         </FormControl>
-        <FormControl isInvalid={Boolean(errors.discordID)}>
+        <FormControl
+          isInvalid={Boolean(errors.discordID)}
+          width={{ base: '100%', md: '25rem' }}
+        >
           <FormLabel>
-            Holofrequency{" "}
+            Holofrequency{' '}
             <Text fontWeight="normal" fontSize="sm" color="GrayText" as="span">
               (a.k.a. your Discord ID)
             </Text>
           </FormLabel>
-          <Input {...register("discordID")} />
+          <Input {...register('discordID')} />
           {errors.discordID && (
             <FormErrorMessage>{errors.discordID.message}</FormErrorMessage>
           )}
@@ -84,27 +90,36 @@ const CustomerDetails = ({ handleNext, data }: CustomerDetailsProps) => {
             It will look something like this: SarahJaneSmith#0000
           </FormHelperText>
         </FormControl>
-        <FormControl isInvalid={Boolean(errors.powerbase)}>
+        <FormControl
+          isInvalid={Boolean(errors.powerbase)}
+          width={{ base: '100%', md: '25rem' }}
+        >
           <FormLabel>
             What powerbase or organisation do you belong to?
           </FormLabel>
-          <Input {...register("powerbase")} />
+          <Input {...register('powerbase')} />
           {errors.powerbase && (
             <FormErrorMessage>{errors.powerbase.message}</FormErrorMessage>
           )}
         </FormControl>
-        <FormControl isInvalid={Boolean(errors.role)}>
+        <FormControl
+          isInvalid={Boolean(errors.role)}
+          width={{ base: '100%', md: '25rem' }}
+        >
           <FormLabel>
             What role do you fill in that powerbase or organisation?
           </FormLabel>
-          <Input {...register("role")} />
+          <Input {...register('role')} />
           {errors.role && (
             <FormErrorMessage>{errors.role.message}</FormErrorMessage>
           )}
         </FormControl>
-        <FormControl isInvalid={Boolean(errors.liabilityWaiver)}>
+        <FormControl
+          isInvalid={Boolean(errors.liabilityWaiver)}
+          width={{ base: '100%', md: '25rem' }}
+        >
           <Box display="flex" gap={5}>
-            <Checkbox size="lg" {...register("liabilityWaiver")} />
+            <Checkbox size="lg" {...register('liabilityWaiver')} />
             <FormLabel fontSize="sm" fontWeight="normal">
               By ticking this box, I confirm I am authorised to make this
               transaction. I take full responsibility should it be learned this
@@ -122,7 +137,7 @@ const CustomerDetails = ({ handleNext, data }: CustomerDetailsProps) => {
         </Button>
       </Stack>
     </form>
-  );
-};
+  )
+}
 
-export { CustomerDetails };
+export { CustomerDetails }
