@@ -1,4 +1,4 @@
-import { Box, Heading } from '@chakra-ui/react'
+import { Stack, Heading } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 
@@ -18,12 +18,12 @@ const Cart = () => {
       <Head>
         <title>Shopping Cart | Jurgoran Shipyard</title>
       </Head>
-      <Box>
+      <Stack spacing={5}>
         <Heading as="h1" mb={2}>
           Your Shopping Cart
         </Heading>
         <DynamicCartSummary />
-      </Box>
+      </Stack>
     </>
   )
 }
