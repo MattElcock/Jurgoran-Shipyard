@@ -34,23 +34,59 @@ const CartSummary = () => {
     remove(newShoppingCart, (item) => item.name === cartItem.name)
     updateShoppingCart(newShoppingCart)
   }
+
+  if (shoppingCart.length === 0) {
+    return (
+      <Card>
+        <CardBody>
+          <Stack spacing={3} alignItems="center">
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              gap={3}
+            >
+              <Icon as={GiFactory} w={20} h={20} />
+              <Text fontWeight="medium">Your cart is empty.</Text>
+            </Box>
+            <Link href="/shop/starships" passHref>
+              <Button
+                width={{ base: 'full', md: 'fit-content' }}
+                colorScheme="orange"
+              >
+                Shop Now
+              </Button>
+            </Link>
+          </Stack>
+        </CardBody>
+      </Card>
+    )
+  }
   return (
-    <Stack spacing={6}>
-      <List>
-        {quantifiedShoppingCart.map((cartItem, i) => (
-          <ListItem key={cartItem.name} mt={i > 0 ? 4 : 0}>
-            {i > 0 && <Divider />}
-            <CartSummaryItem
-              name={cartItem.name}
-              requisition={cartItem.requisition}
-              costPerItem={cartItem.cost}
-              quantity={cartItem.quantity}
-              removeFromBasketHandler={() => removeFromBasketHandler(cartItem)}
-            />
-          </ListItem>
-        ))}
-      </List>
-      {shoppingCart.length > 0 ? (
+    <Box
+      display="grid"
+      gridTemplateAreas={{ base: "'cart' 'summary'", md: "'cart summary'" }}
+      gap={{ base: 5, md: 20 }}
+    >
+      <Box gridArea="cart">
+        <List>
+          {quantifiedShoppingCart.map((cartItem, i) => (
+            <ListItem key={cartItem.name} mt={i > 0 ? 4 : 0}>
+              {i > 0 && <Divider />}
+              <CartSummaryItem
+                name={cartItem.name}
+                requisition={cartItem.requisition}
+                costPerItem={cartItem.cost}
+                quantity={cartItem.quantity}
+                removeFromBasketHandler={() =>
+                  removeFromBasketHandler(cartItem)
+                }
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Box>
+      <Box gridArea="summary">
         <Card>
           <CardBody>
             <Stack spacing={3}>
@@ -79,29 +115,8 @@ const CartSummary = () => {
             </Stack>
           </CardBody>
         </Card>
-      ) : (
-        <Card>
-          <CardBody>
-            <Stack spacing={3}>
-              <Box
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                gap={3}
-              >
-                <Icon as={GiFactory} w={20} h={20} />
-                <Text fontWeight="medium">Your cart is empty.</Text>
-              </Box>
-              <Link href="/shop/starships" passHref>
-                <Button width="full" colorScheme="orange">
-                  Shop Now
-                </Button>
-              </Link>
-            </Stack>
-          </CardBody>
-        </Card>
-      )}
-    </Stack>
+      </Box>
+    </Box>
   )
 }
 
