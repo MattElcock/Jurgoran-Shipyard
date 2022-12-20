@@ -122,13 +122,14 @@ const Summary = ({
             )}
           </Stack>
         </Box>
-
-        <Button variant="solid" colorScheme="orange" onClick={handleSubmit}>
-          Place Order
-        </Button>
-        <Button variant="outline" colorScheme="orange" onClick={handleBack}>
-          Back
-        </Button>
+        <Stack spacing={3} direction={{ base: 'column', md: 'row' }}>
+          <Button variant="solid" colorScheme="orange" onClick={handleSubmit}>
+            Place Order
+          </Button>
+          <Button variant="outline" colorScheme="orange" onClick={handleBack}>
+            Back
+          </Button>
+        </Stack>
       </Stack>
     </Box>
   )

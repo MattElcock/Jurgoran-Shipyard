@@ -57,7 +57,10 @@ const OrderDetails = ({ handleNext, handleBack, data }: OrderDetailsProps) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={4}>
-        <FormControl isInvalid={Boolean(errors.collectionOrDelivery)}>
+        <FormControl
+          isInvalid={Boolean(errors.collectionOrDelivery)}
+          width={{ base: '100%', md: '25rem' }}
+        >
           <FormLabel>
             Would you like to order for collection or delivery?
           </FormLabel>
@@ -78,7 +81,10 @@ const OrderDetails = ({ handleNext, handleBack, data }: OrderDetailsProps) => {
           )}
         </FormControl>
         {watch('collectionOrDelivery') === 'Delivery' && (
-          <FormControl isInvalid={Boolean(errors.deliveryLocation)}>
+          <FormControl
+            isInvalid={Boolean(errors.deliveryLocation)}
+            width={{ base: '100%', md: '25rem' }}
+          >
             <FormLabel>Where would you like your products delivered?</FormLabel>
             <Input {...register('deliveryLocation')} />
             {errors.deliveryLocation && (
@@ -88,7 +94,7 @@ const OrderDetails = ({ handleNext, handleBack, data }: OrderDetailsProps) => {
             )}
           </FormControl>
         )}
-        <FormControl>
+        <FormControl width={{ base: '100%', md: '25rem' }}>
           <FormLabel>Notes</FormLabel>
           <Textarea {...register('notes')} />
           <FormHelperText>
@@ -96,12 +102,14 @@ const OrderDetails = ({ handleNext, handleBack, data }: OrderDetailsProps) => {
             about anything related to your order.{' '}
           </FormHelperText>
         </FormControl>
-        <Button variant="solid" colorScheme="orange" type="submit">
-          Next
-        </Button>
-        <Button variant="outline" colorScheme="orange" onClick={handleBack}>
-          Back to Customer Details
-        </Button>
+        <Stack spacing={3} direction={{ base: 'column', md: 'row' }}>
+          <Button variant="solid" colorScheme="orange" type="submit">
+            Next
+          </Button>
+          <Button variant="outline" colorScheme="orange" onClick={handleBack}>
+            Back to Customer Details
+          </Button>
+        </Stack>
       </Stack>
     </form>
   )
