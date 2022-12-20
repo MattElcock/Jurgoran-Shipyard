@@ -60,8 +60,15 @@ const StarshipDetailPage = () => {
       <Head>
         <title>{data.name} | Jurgoran Shipyard</title>
       </Head>
-      <Stack spacing={5}>
-        <Stack spacing={3}>
+      <Box
+        display="grid"
+        gridTemplateAreas={{
+          base: "'image' 'heading' 'description' 'actions'",
+          md: "'heading image' 'description image' 'actions image'",
+        }}
+        gap={{ base: 5 }}
+      >
+        <Box gridArea="image">
           <Image
             bgColor="black"
             objectFit="cover"
@@ -69,7 +76,9 @@ const StarshipDetailPage = () => {
             src={data.imageUrl}
             alt={data.imageAlt}
           />
-          <Stack spacing={1}>
+        </Box>
+        <Box gridArea="heading">
+          <Stack spacing={{ base: 2 }}>
             <Heading>{data.name}</Heading>
             <Stack as={List} direction="row">
               <ListItem>
@@ -79,59 +88,68 @@ const StarshipDetailPage = () => {
                 <Badge variant="outline">{data.subtype}</Badge>
               </ListItem>
             </Stack>
-          </Stack>
-          {data.requisition ? (
-            <Alert>
-              <AlertIcon alignSelf="start" />
-              <Box>
-                <AlertTitle>Requisition Exclusive</AlertTitle>
-                <AlertDescription>
-                  This product cannot be bought. After placing your order, you
-                  will need to present a requisition order from Imperial
-                  Command.
-                </AlertDescription>
-              </Box>
-            </Alert>
-          ) : (
-            <Text fontSize="2xl">
-              <Text
-                as="span"
-                fontFamily="aurebeshregular"
-                aria-label="Credits: "
-              >
-                d
+
+            {data.requisition ? (
+              <Alert>
+                <AlertIcon alignSelf="start" />
+                <Box>
+                  <AlertTitle>Requisition Exclusive</AlertTitle>
+                  <AlertDescription>
+                    This product cannot be bought. After placing your order, you
+                    will need to present a requisition order from Imperial
+                    Command.
+                  </AlertDescription>
+                </Box>
+              </Alert>
+            ) : (
+              <Text fontSize="2xl">
+                <Text
+                  as="span"
+                  fontFamily="aurebeshregular"
+                  aria-label="Credits: "
+                >
+                  d
+                </Text>
+                {formatter.format(data.cost)}
               </Text>
-              {formatter.format(data.cost)}
-            </Text>
-          )}
-          <ReactMarkdown components={ChakraUIRenderer()}>
-            {data.description}
-          </ReactMarkdown>
-          <Heading size="lg">Armament</Heading>
-          <UnorderedList paddingLeft={5}>
-            {armament.map((weapon) => (
-              <ListItem key={weapon.name}>
-                <Text>{`${weapon.quantity} x ${weapon.name}`}</Text>
-              </ListItem>
-            ))}
-          </UnorderedList>
-        </Stack>
-        <Stack direction="row">
-          <Button
-            variant="solid"
-            colorScheme="orange"
-            size="md"
-            onClick={() => addToCartHandler({ id: starshipId, ...data })}
-          >
-            Add to Cart
-          </Button>
-          <Link href={`/shop/starships`} passHref>
-            <Button variant="ghost" colorScheme="orange" size="md">
-              Back to Shop
+            )}
+          </Stack>
+        </Box>
+        <Box gridArea="description">
+          <Stack>
+            <ReactMarkdown components={ChakraUIRenderer()}>
+              {data.description}
+            </ReactMarkdown>
+            <Heading size="lg">Armament</Heading>
+            <UnorderedList paddingLeft={5}>
+              {armament.map((weapon) => (
+                <ListItem key={weapon.name}>
+                  <Text>{`${weapon.quantity} x ${weapon.name}`}</Text>
+                </ListItem>
+              ))}
+            </UnorderedList>
+          </Stack>
+        </Box>
+        <Box gridArea="actions">
+          <Stack direction="row">
+            <Button
+              variant="solid"
+              colorScheme="orange"
+              size="md"
+              onClick={() => addToCartHandler({ id: starshipId, ...data })}
+            >
+              Add to Cart
             </Button>
-          </Link>
-        </Stack>
-      </Stack>
+            <Box display={{ base: 'block', md: 'none' }}>
+              <Link href={`/shop/starships`} passHref>
+                <Button variant="ghost" colorScheme="orange" size="md">
+                  Back to Shop
+                </Button>
+              </Link>
+            </Box>
+          </Stack>
+        </Box>
+      </Box>
     </>
   )
 }
