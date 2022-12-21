@@ -40,11 +40,7 @@ const ShopItem = ({
   const formatter = new Intl.NumberFormat('en-UK')
 
   return (
-    <Card
-      direction={{ base: 'column', sm: 'row' }}
-      overflow="hidden"
-      variant="outline"
-    >
+    <Card direction={{ base: 'column', sm: 'row' }} overflow="hidden">
       <Image
         bgColor="black"
         objectFit="cover"

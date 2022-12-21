@@ -20,7 +20,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
       gridTemplateRows="auto 1fr auto"
       gap={5}
     >
-      <Box as="header" gridArea="header" bg="gray.900" paddingY={3}>
+      <Box as="header" gridArea="header" bg="black" paddingY={3}>
         <Container maxW={{ lg: 'container.lg' }}>
           <Header />
         </Container>

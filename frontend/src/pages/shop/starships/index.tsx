@@ -16,23 +16,35 @@ import {
   Box,
   RadioGroup,
   Radio,
+  IconButton,
 } from '@chakra-ui/react'
 import { ShopItem } from 'components/ShopItem'
 import { useListStarships } from 'api/useListStarships'
 import { StarshipState } from 'api/useListStarships/useListStarships'
 import { useShoppingCart } from 'providers/ShoppingCartProvider'
 import { MdFilterList } from 'react-icons/md'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import { StarshipFilters } from 'components/StarshipFilters'
+import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 
 const Shop = () => {
   const [typeFilter, setTypeFilter] = useState('')
   const [subtypeFilter, setSubtypeFilter] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
   const [sort, setSort] = useState('asc')
-  const { data } = useListStarships(typeFilter, subtypeFilter, sort)
+  const { data, totalPages } = useListStarships(
+    typeFilter,
+    subtypeFilter,
+    sort,
+    currentPage
+  )
   const { shoppingCart, updateShoppingCart } = useShoppingCart()
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 })
+  }, [currentPage])
 
   const addToCartHandler = (starship: StarshipState) => {
     updateShoppingCart([
@@ -140,23 +152,61 @@ const Shop = () => {
           </Box>
         </Box>
         <Box gridArea="products">
-          <List spacing={5}>
-            {data?.map((starship) => (
-              <ListItem key={starship.id}>
-                <ShopItem
-                  id={starship.id}
-                  title={starship.name}
-                  tags={[starship.type, starship.subtype]}
-                  cost={starship.cost}
-                  imageUrl={starship.imageUrl}
-                  imageAltText={starship.imageAlt}
-                  requisition={starship.requisition}
-                  addToCartHandler={() => addToCartHandler(starship)}
-                  readMoreLink={''}
+          <Stack spacing={10}>
+            <List spacing={5}>
+              {data?.map((starship) => (
+                <ListItem key={starship.id}>
+                  <ShopItem
+                    id={starship.id}
+                    title={starship.name}
+                    tags={[starship.type, starship.subtype]}
+                    cost={starship.cost}
+                    imageUrl={starship.imageUrl}
+                    imageAltText={starship.imageAlt}
+                    requisition={starship.requisition}
+                    addToCartHandler={() => addToCartHandler(starship)}
+                    readMoreLink={''}
+                  />
+                </ListItem>
+              ))}
+            </List>
+            <Box display="flex" justifyContent="center">
+              <Box display="flex" gap={3}>
+                <IconButton
+                  icon={<ChevronLeftIcon w={6} h={6} />}
+                  aria-label="Previous page"
+                  colorScheme="orange"
+                  w="fit-content"
+                  size="sm"
+                  disabled={currentPage === 1}
+                  onClick={() => setCurrentPage(currentPage - 1)}
                 />
-              </ListItem>
-            ))}
-          </List>
+                <Box display="flex" gap={3}>
+                  {[...Array(totalPages)].map((_, i) => (
+                    <Button
+                      key={`pagination-button-${i + 1}`}
+                      size="sm"
+                      variant="link"
+                      color="white"
+                      disabled={currentPage === i + 1}
+                      onClick={() => setCurrentPage(i + 1)}
+                    >
+                      {i + 1}
+                    </Button>
+                  ))}
+                </Box>
+                <IconButton
+                  icon={<ChevronRightIcon w={6} h={6} />}
+                  aria-label="Next page"
+                  colorScheme="orange"
+                  w="fit-content"
+                  size="sm"
+                  onClick={() => setCurrentPage(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                />
+              </Box>
+            </Box>
+          </Stack>
         </Box>
       </Box>
       <Drawer onClose={onClose} isOpen={isOpen} size="full">
