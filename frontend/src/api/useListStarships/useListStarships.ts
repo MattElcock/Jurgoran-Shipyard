@@ -22,9 +22,15 @@ export interface StarshipState extends Starship {
   id: string
 }
 
-const useListStarships = (type: string, subtype: string, sort: string) => {
+const useListStarships = (
+  type: string,
+  subtype: string,
+  sort: string,
+  page: number
+) => {
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState<StarshipState[]>()
+  const [totalPages, setTotalPages] = useState()
   const apiClient = client
 
   useEffect(() => {
@@ -33,8 +39,12 @@ const useListStarships = (type: string, subtype: string, sort: string) => {
 
       const response = await apiClient.query({
         query: gql`
-          query Starships($filters: StarshipFiltersInput, $sort: [String]) {
-            starships(filters: $filters, sort: $sort) {
+          query Starships(
+            $filters: StarshipFiltersInput
+            $sort: [String]
+            $pagination: PaginationArg
+          ) {
+            starships(filters: $filters, sort: $sort, pagination: $pagination) {
               data {
                 id
                 attributes {
@@ -45,6 +55,11 @@ const useListStarships = (type: string, subtype: string, sort: string) => {
                   imageUrl
                   imageAlt
                   requisition
+                }
+              }
+              meta {
+                pagination {
+                  pageCount
                 }
               }
             }
@@ -64,6 +79,10 @@ const useListStarships = (type: string, subtype: string, sort: string) => {
             }),
           },
           sort: [`cost:${sort}`],
+          pagination: {
+            page,
+            pageSize: 10,
+          },
         },
       })
 
@@ -78,13 +97,14 @@ const useListStarships = (type: string, subtype: string, sort: string) => {
           )
         )
       )
+      setTotalPages(response.data.starships.meta.pagination.pageCount)
       setIsLoading(false)
     }
 
     fetchData()
-  }, [apiClient, type, subtype, sort])
+  }, [apiClient, type, subtype, sort, page])
 
-  return { isLoading, data }
+  return { isLoading, data, totalPages }
 }
 
 export { useListStarships }
